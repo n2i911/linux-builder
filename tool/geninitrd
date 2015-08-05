@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# This would generate initrd.img from a romfs image
+
+mkdir -p m0 m1
+dd if=/dev/zero of=ramdisk bs=1k count=4096
+sudo mkfs.ext2 -v -F -m0 ramdisk
+
+sudo mount -o loop ramdisk m0
+sudo mount -o loop romfs.img m1
+
+sudo cp -ra m1/* m0
+
+sync
+
+sudo umount m0
+sudo umount m1
+
+gzip -9 -c ramdisk > initrd.img
+
+rm -rf m0/ m1/ ramdisk
