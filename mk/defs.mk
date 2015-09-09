@@ -40,6 +40,7 @@ target_kernel_dtb := vexpress-v2p-ca9.dtb
 target_uboot := u-boot.bin
 target_rootfs := romfs.img
 target_initrd := initrd.img
+#target_initrd := initramfs.img
 
 # This is speific to qemu
 QMACH := vexpress-a9
