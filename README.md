@@ -1,5 +1,8 @@
 # linux-builder
 
+  This would help to build the kernel and u-boot for machine **vexpress** as well as the root filesystem.
+  It help me to test the kernel quickly when I do experiments on it.
+
 * prerequisites: mkimage, genromfs, qemu
 
   apt-get install genromfs u-boot-tools qemu qemu-system
