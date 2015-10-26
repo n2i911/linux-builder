@@ -2,6 +2,9 @@
 ARCH := arm
 CROSS := arm-none-eabi-
 VERVOSE := 0
+export ARCH
+export CROSS
+export VERVOSE
 
 # This is speific to kernel
 MACH := vexpress
@@ -17,6 +20,12 @@ src_dir := $(root_dir)/src
 uboot_dir := $(src_dir)/$(uboot_version)
 kernel_dir := $(src_dir)/$(kernel_version)
 busybox_dir := $(src_dir)/$(busybox_version)
+export kernel_dir
+
+module_dir := $(root_dir)/module
+
+mk_dir := $(root_dir)/mk
+export mk_dir
 
 rootfs_dir := $(root_dir)/rootfs
 
@@ -27,6 +36,9 @@ target_out_uboot := $(target_out)/$(uboot_version)
 target_out_busybox := $(target_out)/$(busybox_version)
 target_out_rootfs := $(target_out)/rootfs
 target_out_bin := $(target_out)/bin
+target_out_ext_modules := $(target_out_bin)/ext_modules
+export target_out_kernel
+export target_out_ext_modules
 
 # config directory
 config_dir := $(root_dir)/config

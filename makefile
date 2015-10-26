@@ -44,6 +44,16 @@ stamp-rootfs:
 	make build-rootfs
 	touch $@
 
+# kernel modules
+include mk/modules.mk
+stamp-modules:
+	mkdir -p $(target_out_bin)
+	mkdir -p $(target_out_kernel)
+	cp $(kernel_config) $(target_out_kernel)/.config
+	make -C $(kernel_dir) -j4 ARCH=$(ARCH) CROSS_COMPILE=$(CROSS) \
+		O=$(target_out_kernel) V=$(VERVOSE) oldconfig modules_prepare
+	make modules
+
 distclean-rootfs:
 	rm -rf $(target_out_busybox) $(target_out_rootfs) stamp-rootfs
 
