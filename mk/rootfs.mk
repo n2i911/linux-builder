@@ -10,6 +10,7 @@ $(busybox_version):
 
 $(target_rootfs): $(target_out_rootfs) $(target_out_busybox)/.config
 	cp -raf $(rootfs_dir)/* $(target_out_rootfs)
+	cp -ra $(target_out_ext_modules)/*.ko $(target_out_rootfs)/lib/modules/
 	cd $(target_out_bin) && genromfs -v \
 		-V "ROM Disk" \
 		-f $(target_rootfs) \

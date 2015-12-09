@@ -40,19 +40,20 @@ distclean-uboot:
 
 # root filesystem
 include mk/rootfs.mk
-stamp-rootfs:
+stamp-rootfs: stamp-modules
 	make build-rootfs
 	touch $@
 
 # kernel modules
 include mk/modules.mk
-stamp-modules:
+stamp-modules: stamp-kernel
 	mkdir -p $(target_out_bin)
 	mkdir -p $(target_out_kernel)
 	cp $(kernel_config) $(target_out_kernel)/.config
 	make -C $(kernel_dir) -j4 ARCH=$(ARCH) CROSS_COMPILE=$(CROSS) \
 		O=$(target_out_kernel) V=$(VERVOSE) oldconfig modules_prepare
 	make modules
+	touch $@
 
 distclean-rootfs:
 	rm -rf $(target_out_busybox) $(target_out_rootfs) stamp-rootfs
