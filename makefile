@@ -55,6 +55,10 @@ stamp-modules: stamp-kernel
 	make modules
 	touch $@
 
+clean-modules:
+	make modules.clean
+	rm -rf stamp-modules
+
 distclean-rootfs:
 	rm -rf $(target_out_busybox) $(target_out_rootfs) stamp-rootfs
 
